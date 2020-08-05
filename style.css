@@ -1,0 +1,20 @@
+.alert-success {
+    width: 300px;
+    border-radius: 5px;
+    text-align: center;
+    transition: all 1s ease-out;
+    animation: opacity 4s;
+    margin-bottom: 10px;
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

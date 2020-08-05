@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather cast</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container-xl">
+        <div class="container">
+            <h1 id="header-text">Узнайте погоду в вашем городе</h1>
+        <div class="container" id="alert-container"></div>
+        Ваш город: <input type="text" id="search-input" oninput="cityChange()">
+        <input type="button" value="Узнать" onclick="discoverWeather()" class="btn btn-primary btn-sm">
+    </div>
+    <div class="container" id="weatherResult">
+
+    </div>
+
+        <address>
+        <b>ORY.inc</b><br>
+            Ukraine,Irpin, 08200<br>
+        <a href="#">blackdeer12@gmail.com</a>
+        </address>
+    </div>
+</body>
+</html>
