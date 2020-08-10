@@ -1,30 +1,49 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather cast</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
-    <div class="container-xl">
-        <div class="container">
-            <h1 id="header-text">Узнайте погоду в вашем городе</h1>
-        <div class="container" id="alert-container"></div>
-        Ваш город: <input type="text" id="search-input" oninput="cityChange()">
-        <input type="button" value="Узнать" onclick="discoverWeather()" class="btn btn-primary btn-sm">
-    </div>
-    <div class="container" id="weatherResult">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light header">
+        <div class="logo">
+            <h1 id="header-text" class="page-header navbar-brand text-primary">Weather cast</h1>
+            <small class="text-secondary" id="secondary-text">Узнайте погоду в любом городе</small>
+        </div>
 
-    </div>
+        <div class="search-input___container">
+            <form class="form-inline my-2 my-lg-0">
+                <span class="text-secondary mr-1 ml-1 mb-1 mt-2">Название города:</span>
+                <input type="text" id="search-input" class="form-control mr-sm-1 ml-1 mt-2" oninput="cityChange()">
+                <input type="button" value="Узнать" onclick="discoverWeather()"
+                    class="btn btn-primary btn-sm ml-1 mt-2">
+            </form>
+        </div>
+    </nav>
 
-        <address>
-        <b>ORY.inc</b><br>
-            Ukraine,Irpin, 08200<br>
-        <a href="#">blackdeer12@gmail.com</a>
-        </address>
-    </div>
+    <hr>
+    <main>
+        <div class="container text-secondary" id="weatherResult">Укажите свой город</div>
+    </main>
+
+    <div class="container" id="alert-container"></div>
+
+    <address class="bg-light" id="footer">
+        <small>
+            <p align="center">
+                <span class="text-primary">Weather cast ©</span><br>
+                <span class="text-secondary">Ukraine, Irpin, 08200</span><br>
+                <span class="text-dark"><a href="#">blackdeer12@gmail.com</a></span>
+            </p>
+        </small>
+    </address>
 </body>
+
 </html>
