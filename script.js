@@ -1,80 +1,61 @@
-let weatherContainer, weatherInfo, section, request, requestURL, city, alertSuccess, alertContainer, result, br, dotsCounter;
-let interval = setInterval(dotsUpdater, 1000);
-const API_key = '10cc54419fe99e60c1fd5c08247978a4';
+let city = localStorage.getItem("city");
+let currentWeather = null;
 
-alertContainer = document.getElementById('alert-container');
-city = document.getElementById('search-input').value = 'Ирпень';
-headerText = document.getElementById('secondary-text');
-weatherContainer = document.getElementById('weatherResult');
-br = document.createElement('br');
-dotsCounter = 0;
-
-function cityChange() {
-    city = document.getElementById('search-input').value;
+if (city) {
+  showWeather();
+} else {
+  getCity();
 }
 
-function discoverWeather() {
-    clearInterval(interval);
-    // weatherContainer.style.paddingTop = 25 + 'px';
-    weatherContainer.style.top = -5 + '%';
-    weatherContainer.style.width = 350 + 'px';
-    weatherContainer.style.height = 450 + 'px';
-    weatherContainer.style.flexDirection = 'column';
-    weatherContainer.style.justifyContent = 'flex-start';
-    requestURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_key}`;
-    request = new XMLHttpRequest();
-    request.open('GET', requestURL);
-    request.responseType = 'json';
-    request.send();
-    request.onload = function () {
-        result = request.response;
-        alertSuccess = document.createElement('div');
-        alertContainer.append(alertSuccess);
-        alertSuccess.classList.add('alert-success');
-        let alert = document.querySelector('.alert-success');
-        alert.innerHTML = 'Погода успешно загружена';
-        setTimeout(deleteAlert, 4000);
-        weatherContainer.innerHTML = `
-            <h5 style="position: relative; margin-top: 15px">Текущая погода в городе <span class="text-primary">${city}</span></h5><br>
-                Текущая температура: ${result.main.temp}° <br>
-                Ощущается как: ${result.main.feels_like}° <br><br>
-                Минимальная температура за день: ${result.main.temp_min}° <br>
-                Максимальная температура за день: ${result.main.temp_max}° <br><br>
-                Текущее давление: ${result.main.pressure} гектоПаскалей<br>
-                Влажность: ${result.main.humidity}% <br>
-                Видимость: ${result.visibility} метров <br><br>
-                Скорость ветра: ${result.wind.speed} м/с <br>
-                Облачность: ${result.clouds.all}% <br><br>
-                <h6>Данные, согласно с сайтом Weather Map</h6>
-        `;
-    }
-
-    function deleteAlert() {
-        let alert = document.querySelector('.alert-success');
-        alert.remove();
-        // alertContainer.append(br);
-    }
-
-    headerText.innerHTML = `Погода в городе ${city}`;
+let response = null;
+function getCity() {
+  let request = new XMLHttpRequest();
+  request.open('GET', 'https://ip-api.io/json?api_key=e55e4ed9-e9fb-4e7f-b17d-eb27c2b51505');
+  request.responseType = 'text';
+  request.onload = function () {
+    response = JSON.parse(request.response);
+    localStorage.setItem("city", response.city); 
+    city = response.city;
+    setTimeout(() => showWeather(), 1000);
+  }
+  request.send();
 }
 
-function dotsUpdater() {
-    switch(dotsCounter) {
-        case 0:
-        weatherContainer.innerHTML += '.';
-        dotsCounter++;
-        break;
-            case 1:
-            weatherContainer.innerHTML += '.';
-            dotsCounter++;
-            break;
-        case 2:
-        weatherContainer.innerHTML += '.';
-        dotsCounter++;
-        break;
-            case 3:
-            weatherContainer.innerHTML = 'Укажите свой город';
-            dotsCounter = 0;
-            break;
-    }
+function showWeather() {
+  const spinner = document.querySelector(".spinner");
+  const info = document.querySelector(".info");
+  currentWeather = getWeather(city);
+
+  setTimeout(() => {
+    spinner.remove();
+    info.innerHTML = `
+    <div class="weather">
+      <h1 class="weather__title">Текущая погода в городе ${city}</h1>
+        <div class="weather__cast">
+          Температура: ${currentWeather.main.temp}°<br>
+          Ощущается как: ${currentWeather.main.feels_like}°<br>
+          Минимальная температура за день: ${currentWeather.main.temp_min}°<br>
+          Максимальная температура за день: ${currentWeather.main.temp_max}°<br>
+          Текущее давление: ${currentWeather.main.pressure} гектоПаскалей<br>
+          Влажность: ${currentWeather.main.humidity}%<br>
+          Видимость: ${currentWeather.visibility} метров<br>
+          Скорость ветра: ${currentWeather.wind.speed} м/с<br>
+          Облачность: ${currentWeather.clouds.all}%<br>
+        </div>
+      <h3>Данные, согласно с сайтом Weather Map</h3>
+    </div>`
+  }, 600)
+}
+
+function getWeather(city) {
+  const API_key = '10cc54419fe99e60c1fd5c08247978a4';
+
+  requestURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_key}`;
+  request = new XMLHttpRequest();
+  request.open('GET', requestURL);
+  request.responseType = 'json';
+  request.send();
+  request.onload = function () {
+    currentWeather = request.response;
+  }
 }
