@@ -21,36 +21,38 @@
 
         <div class="search">
           <label class="search__description" for="city-inp">Название города:</label>
-            <input id="city-inp" type="text" class="search__input" autocomplete="country">
+            <input id="search-inp" type="text" class="search__input" autocomplete="country">
           
-          <button class="search__button">
-            Узнать
-          </button>
-
-          <div class="toggle-container">
-            <button class="toggle-container__item toggle-container__item-lang">ENG</button>
-
-            <button class="toggle-container__item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M14.53 10.53a7 7 0 0 1-9.058-9.058A7.003 7.003 0 0 0 8 15a7.002 7.002 0 0 0 6.53-4.47z"/>
-              </svg>
+          <div class="for-adaptive">
+            <button class="search__button" id="search-btn">
+              Узнать
             </button>
+  
+            <div class="toggle-container">
+              <button class="toggle-container__item toggle-container__item-lang" id="lang-btn">RU</button>
+  
+              <button class="toggle-container__item" id="theme-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M14.53 10.53a7 7 0 0 1-9.058-9.058A7.003 7.003 0 0 0 8 15a7.002 7.002 0 0 0 6.53-4.47z"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
     </nav>
   </header>
 
   <main class="main">
-      <!-- <div class="blur"></div> -->
-        <!-- <div class="starting-text">
+      <div class="blur"></div>
+        <div class="starting-text">
           Пожалуйста, предоставьте нам информацию о своём местоположении.<br>
-          Нажмите "Разрешить" вверху или введите название своего города в
+          Нажмите "Попробовать снова" или введите название своего города в
           графе поиска.
           <button id="get-geo-btn">Ещё раз</button>
           Please, provide us information about your location.<br>
-          Click "Allow" above type your city in the search field.
+          Click "Try again" or type your city in the search field.
           <button id="get-geo-btn">Try again</button>
-        </div> -->
+        </div>
 
         <div class="spinner">
           <div class="spinner-inner"></div>
@@ -59,7 +61,7 @@
         <div class="info"></div>
   </main>
 
-  <footer class="footer bg-light">
+  <footer class="footer">
       <span class="text-primary footer__text-top">Weather cast ©</span><br>
       <span class="text-secondary">Ukraine, Irpin, 08200</span><br>
       <span class="text-dark"><a href="mailto:blackdeer12@gmail.com">blackdeer12@gmail.com</a></span>
