@@ -1,4 +1,4 @@
-# Weather cast
+# Weathercast
 
 ## Check weather anywhere
 
